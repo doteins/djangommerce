@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>{% block title %}{% endblock %} | Djangommerce</title>
+  <meta name="description" content="A brief description" />
+  <meta name="author" content="Based  in Oulu, Finland. Djangommerce is an ecommerce project build with Django"/>
+
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+  <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" onload="this.rel = 'stylesheet'"> -->
+
+  
+</head>
+<body>
+  <!-- Header content -->
+  {% include 'partials/_header.html' %}
+
+  <!-- Main content from apps -->
+  <main class="px-6 py-6">
+    {% block content %} {% endblock %}
+  </main>
+
+  <!--Footer content-->
+  {% include 'partials/_footer.html' %} 
+  
+
+</body>
+</html>
