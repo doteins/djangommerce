@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-class Category(model.Models):
+class Category(models.Model):
   name = models.CharField(max_length=255)
 
   # Meta classes to display info about category in admin panel
   class Meta:
-    ordering = ("name")
+    ordering = ("name",)
     verbose_name_plural = "Categories"
 
   def __str__(self):
