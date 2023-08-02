@@ -3,59 +3,18 @@
 
 {% block title %}Sign up{% endblock %}
 {% block content %}
-<section>
-  <h1 class="mb-6 text-3xl">Sign up</h1>
+<div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+  <h1 class="mb-6 text-3xl text-center">Sign up</h1>
 
-  <form id="form" method="" action="">
+  <form id="form" method="POST" action=".">
     {% csrf_token %}
 
-    <div class="mb-3">
-      <label class="inline-block mb-2">Username</label><br>
-      {{ form.username }}
-    </div>
+    {% for field in form %}
+    <div class="mb-3 p-2">{{ field }}</div>
+    {% endfor %}
 
-    <div class="mb-3">
-      <label class="inline-block mb-2">Email</label><br>
-      {{ form.email }}
-    </div>
-
-    <div class="mb-3">
-      <label class="inline-block mb-2">Password</label><br>
-      {{ form.password1 }}
-    </div>
-
-    <div class="mb-3">
-      <label class="inline-block mb-2">Repeat password</label><br>
-      {{ form.password2 }}
-    </div>
-
-    {% if form.errors or form.non_field_errors %}
-      <div class="mb-3 p-6 bg-red-100 rounded-xl">
-        {% for field in form %}
-            {{ field.errors }}
-        {% endfor %}
-
-        {{ form.non_field_errors }}
-      </div>
-    {% endif %}
-
-    <button id="form-submit" class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+    <button id="form-submit"
+      class="block mx-auto w-full py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
   </form>
-</section>
-
-<script>
-  document.querySelector('#form-submit').addEventListener('click', function (e) {
-    const formdata = {
-      username: document.querySelector('#username').value,
-      email: document.querySelector('#email').value,
-      password: document.querySelector('#password').value,
-    }
-
-    fetch("{% url 'core:signup' %}", { method: 'POST', body: JSON.stringify(formdata) })
-      .then(res => res.text())
-      .then(data => {
-        document.querySelector("#form").reset()
-      })
-  })
-</script>
+</div>
 {% endblock %}
