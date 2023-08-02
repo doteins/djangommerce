@@ -17,3 +17,9 @@ class SignupForm(UserCreationForm):
         "required": True, 
       }
       self.fields[str(field)].widget.attrs.update(inputs_attributes)
+    self.fields["password1"].widget.attrs.update({
+      "placeholder": "Password",
+    })
+    self.fields["password2"].widget.attrs.update({
+      "placeholder": "Repeat the password",
+    })
