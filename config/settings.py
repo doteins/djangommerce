@@ -28,6 +28,11 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = []
 
+# Login overwrite routes
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Application definition
 
@@ -123,6 +128,7 @@ STATICFILES_DIRS = [
     "core/static",
 ]
 
+# Media uploaded by users goes to this directory
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
