@@ -12,7 +12,7 @@ class SignupForm(UserCreationForm):
     super().__init__(*args, **kwargs)
     for field in self.fields:
       inputs_attributes = {
-        "class": "w-full py-4 px-6 rounded-xl", 
+        "class": "w-full py-4 px-6 rounded-xl border border-gray-300", 
         "placeholder": f"{str.title(field)}", 
         "required": True, 
       }
@@ -27,14 +27,15 @@ class SignupForm(UserCreationForm):
     })
 
 class LoginForm(AuthenticationForm):
-  model = User
-  fields = ['email', 'password']
+  class Meta:
+    model = User
+    fields = ['email', 'password']
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     for field in self.fields:
       inputs_attributes = {
-        "class": "w-full py-4 px-6 rounded-xl", 
+        "class": "w-full py-4 px-6 rounded-xl border border-gray-300", 
         "placeholder": f"{str.title(field)}", 
         "required": True, 
       }
