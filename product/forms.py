@@ -15,3 +15,16 @@ class NewItemForm(forms.ModelForm):
         "required": True, 
       }
       self.fields[str(field)].widget.attrs.update(inputs_attributes)
+    
+    # Overwrite properties
+    self.fields["category"].empty_label = "-- Click here to choose the category --"
+    self.fields["description"].widget.attrs.update({
+      "rows": 8
+    })
+    self.fields["price"].widget.attrs.update({
+      "min": 0
+    })
+    self.fields["image"].widget.attrs.update({
+      "class": "w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+    })
+
