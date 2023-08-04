@@ -3,19 +3,26 @@
 <head>
   <nav
     class="sticky top-0 z-10 backdrop-filter backdrop-blur-lg bg-opacity-30 py-5 px-6 flex justify-between items-center border-b border-gray-200">
-    <a href="/" class="space-x-2"><img src="{% static 'img/favicon.ico' %}" alt="Logo"></a>
-    <a href="/" class="text-xl font-semibold">Djangommerce</a>
+    <div class="flex items-center">
+      <a href="/"><img src="{% static 'img/logo.png' %}" alt="Logo" class="h-8 w-8"></a>
+      <a href="/"
+        class="px-1 text-xl font-bold bg-gradient-to-r from-cyan-500 to-green-500 bg-clip-text text-transparent hover:text-teal-700">jangommerce</a>
+    </div>
     <div class="space-x-6">
-      <a href="#" class="text-lg font-semibold hover:text-gray-500">New item</a>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-500">New item</a>
+      {% endif %}
       <a href="#" class="text-lg font-semibold hover:text-gray-500">Browse</a>
 
       {% if request.user.is_authenticated %}
-      <a href="#" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Inbox</a>
       <a href="#"
-        class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
+        class="px-6 py-3 text-lg font-semibold bg-gradient-to-r from-cyan-500 to-green-500 text-white rounded-xl hover:bg-teal-700">Inbox</a>
+      <a href="{% url 'core:dashboard' %}"
+        class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">My items</a>
       {% else %}
       <a href="{% url 'core:signup' %}"
-        class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
+        class="px-6 py-3 text-lg font-semibold bg-gradient-to-r from-cyan-500 to-green-500 text-white rounded-xl hover:bg-teal-700">Sign
+        up</a>
       <a href="{% url 'core:login' %}"
         class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
       {% endif %}
