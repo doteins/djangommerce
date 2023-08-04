@@ -25,6 +25,16 @@ class NewItemForm(forms.ModelForm):
       "min": 0
     })
     self.fields["image"].widget.attrs.update({
-      "class": "w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+      "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50",
+      "required": False
     })
 
+class EditItemForm(NewItemForm):
+  class Meta(NewItemForm.Meta):
+    fields = NewItemForm.Meta.fields + ["status"]
+    widgets = {
+      'image': forms.FileInput(attrs={
+        "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50",
+        "required": False
+      })
+    }
