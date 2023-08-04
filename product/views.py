@@ -24,3 +24,11 @@ def new_item(request):
   
   ctx = { "form": form, "title": "New item" }
   return render(request, "new.html", ctx)
+
+@login_required
+def delete_item(request, pk):
+  user = request.user
+  item = get_object_or_404(Item, pk=pk, created_by=user)
+  item.delete()
+
+  return redirect("core:user_items")
