@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from product.models import Category, Item
@@ -23,8 +24,12 @@ def signup(request):
   ctx = { "form": form }
   return render(request, 'signup.html', ctx)
 
-def login(request):
-  return render(request, 'login.html', {})
+@login_required
+def user_items(request):
+  user_items = Item.objects.filter(created_by=request.user)
+
+  ctx = { "items": user_items, "title": "My items" }
+  return render(request, "user_items.html", ctx)
 
 def contact(request):
   return render(request, 'contact.html', {})
