@@ -14,6 +14,8 @@ def index(request):
   return render(request, 'index.html', ctx)
  
 def signup(request):
+  categories = Category.objects.all()
+  
   form = SignupForm()
   if request.method == 'POST':
     form = SignupForm(request.POST)
