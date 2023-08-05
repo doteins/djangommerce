@@ -23,7 +23,7 @@ def new_item(request):
       return redirect('item:detail', pk=item.id)
   
   ctx = { "form": form, "title": "New item" }
-  return render(request, "new.html", ctx)
+  return render(request, "generic_form.html", ctx)
 
 @login_required
 def edit_item(request, pk):
@@ -39,7 +39,7 @@ def edit_item(request, pk):
       return redirect('item:detail', pk=item.id)
   
   ctx = { "form": form, "title": "Edit item" }
-  return render(request, "new.html", ctx)
+  return render(request, "generic_form.html", ctx)
 
 @login_required
 def delete_item(request, pk):

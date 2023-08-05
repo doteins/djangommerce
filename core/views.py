@@ -21,8 +21,9 @@ def signup(request):
       form.save()
       return redirect("/login/")
     
-  ctx = { "form": form }
-  return render(request, 'signup.html', ctx)
+  ctx = { "form": form, "categories": categories, "title": "Sign up"}
+  return render(request, 'generic_form.html', ctx)
+
 
 @login_required
 def user_items(request):
