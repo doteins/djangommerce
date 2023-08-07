@@ -2,42 +2,81 @@
 {% load static %}
 
 {% block title %}
+{% if request.user == item.created_by %}
+{{ title }}
+{% else %}
 {{ item.name }}
+{% endif %}
 {% endblock %}
 
 {% block content %}
 <!-- Selected item content -->
 <section class="grid grid-cols-5 gap-6">
-  <div class="col-span-3">
+  <!-- Render image -->
+  <div class="col-span-3 bg-gray-100 rounded-xl">
     {% if item.image %}
     <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-xl">
     {% else %}
     <img src="https://unsplash.it/g/600/400" class="rounded-xl">
     {% endif %}
+
+    <!-- Render items details before changes by user -->
+    {% if request.user == item.created_by %}
+    <div class="p-8">
+      <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+      <p class="py-0.5 text-gray-600"><strong>Price: </strong>{{ item.price }}</p>
+      <p class="py-0.5 text-gray-600"><strong>Status: </strong>{{ item.status }}</p>
+      <p class="py-0.5 text-gray-600"><strong>Seller: </strong>{{ item.created_by.username }}</p>
+
+      {% if item.description %}
+      <p class="text-gray-700">
+        <strong class="py-0.5 text-gray-600">Description:</strong>
+        {{ item.description }}
+      </p>
+      {% endif %}
+    </div>
+    {% endif %}
+
   </div>
 
+  <!-- Render form -->
   <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
+
+    {% if request.user == item.created_by %}
+    <form id="form" method="POST" action=".">
+      {% csrf_token %}
+
+      <!-- Display form fields -->
+      {% for field in form %}
+      <div class="mb-3 p-2">{{ field }}</div>
+      {% endfor %}
+
+      <!-- Display error if any -->
+      {% if form.errors or form.non_field_errors %}
+      <div class="mb-3 p-6 bg-red-100 rounded-xl">
+        {% for field in form %}
+        {{ field.errors }}
+        {% endfor %}
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <button id="form-submit"
+        class="block mx-auto w-full py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+    </form>
+
+    {% else %}
     <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
-    <p class="text-gray-500"><strong>Price: </strong>{{ item.price }}</p>
-    <p class="text-gray-500"><strong>Status: </strong>{{ item.status }}</p>
-    <p class="text-gray-500"><strong>Seller: </strong>{{ item.created_by.username }}</p>
+    <p class="py-0.5 text-gray-600"><strong>Price: </strong>{{ item.price }}</p>
+    <p class="py-0.5 text-gray-600"><strong>Status: </strong>{{ item.status }}</p>
+    <p class="py-0.5 text-gray-600"><strong>Seller: </strong>{{ item.created_by.username }}</p>
 
     {% if item.description %}
-    <p class="text-gray-700">
-      <strong class="text-gray-500">Description:</strong>
+    <p class="py-0.5 text-gray-700">
+      <strong class="py-0.5 text-gray-600">Description:</strong>
       {{ item.description }}
     </p>
     {% endif %}
 
-    {% if request.user == item.created_by %}
-    <div class="mt-6 p-6 bg-white rounded-xl">
-      <p>This is your item!</p>
-      <a href="{% url 'item:edit' item.id %}"
-        class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl">Edit</a>
-      <a href="{% url 'item:delete' item.id %}"
-        class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-red-500 text-white rounded-xl">Delete</a>
-    </div>
-    {% else %}
     <a href="#"
       class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact
       seller</a>
@@ -52,18 +91,18 @@
   <div class="grid grid-cols-3 gap-3">
     {% for item in related_items %}
     <div>
-      <a href="{% url 'item:detail' item.id %}">
-        <div>
-          {% if item.image %}
-          <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl" loading="lazy">
-          {% else %}
-          <img src="https://unsplash.it/g/600/400" alt="No image" class="rounded-t-xl">
-          {% endif %}
-        </div>
-        <div class="p-6 bg-white rounded-b-xl">
-          <h2 class="text-2xl">{{ item.name }}</h2>
-          <p class="text-gray-500">Price: {{ item.price }}</p>
-        </div>
+      <!-- <a href="{% url 'item:detail' item.id %}"> -->
+      <div>
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl" loading="lazy">
+        {% else %}
+        <img src="https://unsplash.it/g/600/400" alt="No image" class="rounded-t-xl">
+        {% endif %}
+      </div>
+      <div class="p-6 bg-white rounded-b-xl">
+        <h2 class="text-2xl">{{ item.name }}</h2>
+        <p class="text-gray-500">Price: {{ item.price }}</p>
+      </div>
       </a>
     </div>
     {% endfor %}
