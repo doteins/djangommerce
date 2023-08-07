@@ -8,7 +8,7 @@
 <div class="w-4/5 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
   <h1 class="mb-6 text-3xl text-center">{{ title }}</h1>
 
-  <form id="form" method="POST" action=".">
+  <form id="form" method="POST" action="." enctype="multipart/form-data">
     {% csrf_token %}
 
     <!-- Display form fields -->
