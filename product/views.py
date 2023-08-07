@@ -20,14 +20,15 @@ def browser(request):
     'query':query,
     "items": items,
     "categories": categories,
-    "category_id": int(category_id)
+    "category_id": int(category_id),
   }
   return render(request, 'items.html', ctx)
 
 def detail(request, pk):
-  user = request.user
+  user_items = Item.objects.filter(created_by=request.user)
   item = get_object_or_404(Item, pk=pk)
   related_items = Item.objects.filter(category=item.category, status=Item.AVAILABLE).exclude(pk=pk)[0:3]
+  
   form = EditItemForm(instance=item)
   if request.method == "POST":
     form = EditItemForm(request.POST, request.FILES, instance=item)
@@ -40,7 +41,8 @@ def detail(request, pk):
     "item": item, 
     "related_items": related_items,
     "form": form, 
-    "title": "Edit item" 
+    "title": "Edit item",
+    "user_items": user_items,
   }
   
   return render(request, "detail.html", ctx)
