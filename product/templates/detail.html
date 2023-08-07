@@ -61,7 +61,9 @@
       </div>
       {% endif %}
       <button id="form-submit"
-        class="block mx-auto w-full py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+        class="block mb-3 w-full py-4 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Submit</button>
+      <a href="{% url 'item:delete' item.id %}"
+        class="block mx-auto w-full py-4 text-lg bg-red-400 hover:bg-red-600 rounded-xl text-center text-white">Delete</a>
     </form>
 
     {% else %}
