@@ -1,6 +1,13 @@
 from django import forms
 from .models import Item
 
+''' 
+If you are using a ModelForm then there is no any need
+of playing with a cleaned_data dictionary because 
+when you do form.save() it is already be matched 
+and the clean data is saved.
+'''
+
 class NewItemForm(forms.ModelForm):
   class Meta:
     model = Item
@@ -11,8 +18,7 @@ class NewItemForm(forms.ModelForm):
     for field in self.fields:
       inputs_attributes = {
         "class": "w-full py-4 px-6 rounded-xl border border-gray-300", 
-        "placeholder": f"{str.title(field)}", 
-        "required": True, 
+        "placeholder": f"{str.title(field)}",  
       }
       self.fields[str(field)].widget.attrs.update(inputs_attributes)
     

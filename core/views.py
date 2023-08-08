@@ -42,6 +42,7 @@ def contact(request):
   if request.method == "POST":
     form = ContactForm(request.POST)
     if form.is_valid():
+      # Form does not come from Model - forms.Form
       name = form.cleaned_data["name"]
       from_email = form.cleaned_data["from_email"]
       subject = form.cleaned_data["subject"]

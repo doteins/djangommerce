@@ -35,6 +35,7 @@ def detail(request, pk):
   if request.method == "POST":
     form = EditItemForm(request.POST, request.FILES, instance=item)
     if form.is_valid:
+      # No need to clean data as form uses a ModelForm
       form.save()
 
       return redirect('item:detail', pk=item.id)
