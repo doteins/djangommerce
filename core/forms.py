@@ -23,7 +23,7 @@ class SignupForm(UserCreationForm):
       "placeholder": "Password",
     })
     self.fields["password2"].widget.attrs.update({
-      "placeholder": "Repeat the password",
+      "placeholder": "Confirm password",
     })
 
 class LoginForm(AuthenticationForm):
