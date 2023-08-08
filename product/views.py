@@ -25,9 +25,11 @@ def browser(request):
   return render(request, 'items.html', ctx)
 
 def detail(request, pk):
-  user_items = Item.objects.filter(created_by=request.user)
   item = get_object_or_404(Item, pk=pk)
   related_items = Item.objects.filter(category=item.category, status=Item.AVAILABLE).exclude(pk=pk)[0:3]
+  user_items = None
+  if request.user.is_authenticated:
+    user_items = Item.objects.filter(created_by=request.user)
   
   form = EditItemForm(instance=item)
   if request.method == "POST":
