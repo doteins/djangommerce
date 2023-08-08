@@ -123,9 +123,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'core/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    "core/static",
+    "static",
 ]
 
 # Media uploaded by users goes to this directory
