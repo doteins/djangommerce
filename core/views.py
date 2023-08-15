@@ -22,7 +22,6 @@ def signup(request):
   if request.method == 'POST':
     form = SignupForm(request.POST)
     if form.is_valid():
-      form.cleaned_data()
       form.save()
       return redirect("/login/")
     
