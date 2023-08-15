@@ -1,6 +1,6 @@
 {% load static %}
 
-<head>
+<!-- <head>
   <nav
     class="sticky top-0 z-10 backdrop-filter backdrop-blur-lg bg-opacity-30 py-5 px-6 flex justify-between items-center border-b border-gray-200">
     <div class="flex items-center">
@@ -31,4 +31,47 @@
     </div>
 
   </nav>
+</head> -->
+
+<head>
+  <div class="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 
+  bg-base-200 text-base-content shadow-sm">
+    <nav class="navbar w-full px-12">
+      <div class="flex-1">
+        <a href="/" class="btn btn-ghost normal-case text-xl">
+          <img src="{% static 'img/logo.png' %}" alt="Logo" class="px-0 mx-0 h-8 w-8">
+          <h1 class="px-1 text-xl font-bold bg-gradient-to-r from-cyan-500 to-green-500 bg-clip-text text-transparent hover:text-teal-700">jangommerce</h1>
+        </a>
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'item:new' %}">New item</a></li>
+          {% endif %}
+          <li><a href="{% url 'item:items' %}" >Browse</a></li>
+          <li>
+            <details>
+              <summary>
+                {% if request.user.is_authenticated %}
+                Dashboard
+                {% else %}
+                Join us
+                {% endif %}
+              </summary>
+              <ul class="p-2">
+                {% if request.user.is_authenticated %}
+                <li><a href="#">Inbox</a></li>
+                <li><a href="{% url 'core:user_items' %}">My items</a></li>
+                <li><a href="{% url 'core:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'core:login' %}">Login</a></li>
+                <li><a href="{% url 'core:signup' %}">Sign up</a></li>
+                {% endif %}
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </head>

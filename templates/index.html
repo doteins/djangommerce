@@ -3,41 +3,47 @@
 
 {% block title %}Welcome{% endblock %}
 {% block content %}
-<div class="px-6 py-8 bg-gray-100 rounded-xl">
-  <h2 class="mb-12 text-2xl text-center">Newest items</h2>
 
+<!-- Items gallery -->
+<div class="px-6 py-8 bg-base-200 rounded-xl">
+  <h2 class="mb-12 text-2xl text-center">New items</h2>
+  <!-- Items gallery -->
   <div class="grid grid-cols-3 gap-3">
-      {% for item in items %}
-        <div>
-          <a href="{% url 'item:detail' item.id %}">
-            <div>
-              <img src="{{ item.image.url }}" class="rounded-t-xl" loading="lazy">
-            </div>
-
-            <div class="p-6 bg-white rounded-b-xl">
-              <h2 class="text-2xl">{{ item.name }}</h2>
-              <p class="text-gray-500">Price: {{ item.price }}</p>
-            </div>
-          </a>
+    {% for item in items %}
+    <div class="card bg-base-100 shadow-xl">
+      <a href="{% url 'item:detail' item.id %}">
+        <figure>
+          {% if item.image %}
+          <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-full" loading="lazy">
+          {% else %}
+          <img src="https://placehold.co/520x960?text=Welcome!" class="rounded-t-xl object-cover h-52 w-full" alt="No image">
+          {% endif %}
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{ item.name }}</h2>
+          <p>Price: {{ item.price }}</p>
         </div>
-      {% endfor %}
+      </a>
+    </div>
+    {% endfor %}
   </div>
 </div>
 
-<div class="mt-6 px-6 py-6 bg-gray-100 rounded-xl">
+<!-- Categories section -->
+<div class="mt-6 px-6 py-6 bg-base-200 rounded-xl">
   <h2 class="mb-10 text-2xl text-center">Categories</h2>
 
   <div class="grid grid-cols-3 gap-3">
-      {% for category in categories %}
-        <div>
-          <a href="#">
-            <div class="p-6 bg-white rounded-b-xl">
-              <h2 class="text-2xl">{{ category.name }}</h2>
-              <p class="text-gray-500">{{ category.items.count }} items</p>
-            </div>
-          </a>
+    {% for category in categories %}
+    <div>
+      <a href="#">
+        <div class="card card-body bg-base-100 shadow-xl">
+          <h2 class="text-2xl">{{ category.name }}</h2>
+          <p class="text-gray-500">{{ category.items.count }} items</p>
         </div>
-      {% endfor %}
+      </a>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
