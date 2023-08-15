@@ -28,9 +28,6 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = []
 
-# Development environment set to False by default for security reasons
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
 # Login overwrite routes
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -85,14 +82,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if DEVELOPMENT_MODE is True:
+if DEBUG is True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-elif DEVELOPMENT_MODE is None and os.getenv('DB_USER', None) is True:
+elif DEBUG is False and os.getenv('DB_USER', None) is True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -103,7 +100,7 @@ elif DEVELOPMENT_MODE is None and os.getenv('DB_USER', None) is True:
             'PORT': os.getenv("DB_PORT"),
         }
     }
-elif DEVELOPMENT_MODE is None and os.getenv('DB_USER', None) is None:
+elif DEBUG is False and os.getenv('DB_USER', None) is None:
     raise Exception("DB_USER environment variable not defined")
 
 
