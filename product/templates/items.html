@@ -1,21 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 {{ title }}
 {% endblock %}
 
 {% block content %}
-<div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100">
-  <div class="col-span-1">
-    <form method="get" action="{% url 'item:items' %}">
-      <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}"
-        placeholder="Find a bike, a chair or car...">
+<div class="grid grid-cols-4 gap-4">
+  <div class="col-span-1 bg-base-200 rounded-xl">
 
-      <button class="mt-2 py-4 px-8 w-full text-lg bg-teal-500 text-white text-center rounded-xl">Search</button>
-    </form>
-
-    <div class="my-4">
-      <p class="font-semibold">Categories</p>
+    <!-- Filter by category -->
+    <div class="my-4 mx-4">
+      <p class="font-semibold ">Categories</p>
       <ul>
         {% for category in categories %}
         <li class="py-2 px-2 rounded-xl{% if category.id == category_id %} bg-gray-200{% endif %}">
@@ -25,27 +21,46 @@
       </ul>
     </div>
 
+    <!-- Filter text input -->
+    <form method="get" action="{% url 'item:items' %}">
+      <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}"
+        placeholder="Filter by...">
+      <button class="mt-2 py-4 px-8 w-full text-lg bg-teal-500 text-white text-center rounded-xl">Search</button>
+    </form>
+
     <a href="{% url 'item:items' %}"
       class="mt-2 py-4 px-8 w-full inline-block bg-yellow-500 text-lg rounded-xl text-white text-center">Clear
       filters</a>
   </div>
 
-  <div class="col-span-3">
+  <div class="col-span-3 px-6 py-8 bg-base-200 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">
+      {% if query|length > 20 %}
+      <!-- Query calling title method. In python code: title(query)-->
+      Try with a shorter text
+      {% elif query and not items %}
+      No results for "{{ query }}"
+      {% elif query and items %}
+      Results for "{{ query }}"
+      {% else %}
+      New items
+      {% endif %}
+    </h2>
+
     <div class="grid grid-cols-3 gap-3">
       {% for item in items %}
-      <div>
+      <div class="card bg-base-100 shadow-xl">
         <a href="{% url 'item:detail' item.id %}">
-          <div>
+          <figure>
             {% if item.image %}
-            <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-xl">
+            <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-full" loading="lazy">
             {% else %}
-            <img src="https://unsplash.it/g/600/400" class="rounded-xl">
+            <img src="https://placehold.co/520x960?text=Welcome!" class="rounded-t-xl object-cover h-52 w-full" alt="No image">
             {% endif %}
-          </div>
-
-          <div class="p-6 bg-white rounded-b-xl">
-            <h2 class="text-2xl">{{ item.name }}</h2>
-            <p class="text-gray-500">Price: {{ item.price }}</p>
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">{{ item.name }}</h2>
+            <p>Price: {{ item.price }}</p>
           </div>
         </a>
       </div>

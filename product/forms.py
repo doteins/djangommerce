@@ -31,7 +31,7 @@ class NewItemForm(forms.ModelForm):
       "min": 0
     })
     self.fields["image"].widget.attrs.update({
-      "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50",
+      "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-base-100",
       "required": False
     })
 
@@ -40,7 +40,7 @@ class EditItemForm(NewItemForm):
     fields = NewItemForm.Meta.fields + ["status"]
     widgets = {
       'image': forms.FileInput(attrs={
-        "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50",
+        "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-base-100",
         "required": False
       })
     }
