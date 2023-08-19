@@ -5,7 +5,7 @@ from .models import Item
 If you are using a ModelForm then there is no any need
 of playing with a cleaned_data dictionary because 
 when you do form.save() it is already be matched 
-and the clean data is saved.
+and the cleaned data is saved.
 '''
 
 class NewItemForm(forms.ModelForm):
@@ -31,7 +31,7 @@ class NewItemForm(forms.ModelForm):
       "min": 0
     })
     self.fields["image"].widget.attrs.update({
-      "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-base-100",
+      "class": "file-input file-input-bordered file-input-accent w-full",
       "required": False
     })
 
@@ -40,7 +40,7 @@ class EditItemForm(NewItemForm):
     fields = NewItemForm.Meta.fields + ["status"]
     widgets = {
       'image': forms.FileInput(attrs={
-        "class": "block w-full py-3 px-6 text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-base-100",
+        "class": "file-input file-input-bordered file-input-accent w-full",
         "required": False
       })
     }
