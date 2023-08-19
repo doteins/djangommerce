@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("core.urls")),
     path('items/', include("product.urls")),
+    path('inbox/', include("chat.urls")),
 ]
