@@ -34,6 +34,37 @@ def new_conversation(request, item_pk):
   else:
     form = MessageForm()
   
-  ctx = { 'form': form }
+  ctx = { 'form': form, 'item': item }
   return render(request, 'new.html', ctx)
 
+
+@login_required
+def inbox(request):
+  conversations = Conversation.objects.filter(members__in=[request.user.id])
+
+  ctx = { 'conversations': conversations, 'title': 'Inbox' }
+  return render(request, 'inbox.html', ctx)
+
+
+@login_required
+def chat(request, pk):
+  conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
+
+  if request.method == 'POST':
+    form = MessageForm(request.POST)
+
+    if form.is_valid():
+      conversation_message = form.save(commit=False)
+      conversation_message.conversation = conversation
+      conversation_message.created_by = request.user
+      conversation_message.save()
+
+      conversation.save()
+
+      return redirect('chat:chat', pk=pk)
+  else:
+    form = MessageForm()
+
+  ctx = { 'conversation': conversation, 'form': form }
+
+  return render(request, 'chat.html', ctx)
