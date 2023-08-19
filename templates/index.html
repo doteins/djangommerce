@@ -4,6 +4,21 @@
 {% block title %}Welcome{% endblock %}
 {% block content %}
 
+<!-- Welcome message -->
+<div class="my-6 hero py-16 bg-base-200 rounded-xl">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      {% if request.user.is_authenticated %}
+      <h4 class="text-5xl font-bold">Good to see you back here, {{ request.user.username | title }}!😃</h4>
+      {% else %}
+      <h1 class="text-5xl font-bold">Hello there 👋</h1>
+      <p class="py-6">Djangommerce is an online market hub built using Django and Tailwind CSS with DaisyUI components, designed to allow you to post items for sale and find potential buyers! </p>
+      <a href="{% url 'core:signup' %}" class="btn btn-primary">Join us now!</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 <!-- Items gallery -->
 <div class="px-6 py-8 bg-base-200 rounded-xl">
   <h2 class="mb-12 text-2xl text-center">New items</h2>
