@@ -80,7 +80,7 @@
     </p>
     {% endif %}
 
-    <a href="#"
+    <a href="{% url 'chat:new' item.id %}"
       class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact
       seller</a>
     {% endif %}
@@ -99,7 +99,7 @@
           {% if item.image %}
           <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-96" loading="lazy">
           {% else %}
-          <img src="{% static 'img/no-photo.png' %}" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
+          <img src="https://placehold.co/520x960?text=Welcome!" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
           {% endif %}
         </figure>
         <div class="card-body">
