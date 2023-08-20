@@ -10,19 +10,23 @@
 
   <h1 class="mb-12 text-2xl text-center">{{ title }}</h1>
 
-  {% for conversation in conversations %}
-  <a href="{% url 'chat:chat' conversation.id %}">
+  {% for chat in conversations %}
+  <a href="{% url 'chat:chat' chat.id %}">
     <div class="card card-side my-5 bg-base-100 shadow-xl">
-      <figure class="h-36 w-36 rounded-xl"><img src="{{ conversation.item.image.url }}"
-          alt="{{ conversation.item.image }}" class="h-full w-full" /></figure>
+      <figure class="h-36 w-36 rounded-xl">
+        {% if chat.item.image %}
+        <img src=" {{ chat.item.image.url }}" alt="{{ chat.item.image }}" class="h-full w-full" />
+        {% else %}
+        <img src="https://placehold.co/520x960?text=Djangommerce" alt="Djangommerce" class="h-full w-full" />
+        {% endif %}  
+      </figure>
       <div class="card-body">
-        {% for member in conversation.members.all %}
+        {% for member in chat.members.all %}
         {% if member != request.user %}
-        <h2 class="card-title"><strong>{{ member.username | title }}</strong> | {{ conversation.modified_at }}</h2>
-        <p>{{ conversation.item.name }}</p>
-        <!-- <div class="card-actions justify-end">
-          <button class="btn btn-primary">Watch</button>
-        </div> -->
+        <h2 class="card-title"><strong>{{ member.username | title }}</strong> | {{ chat.item.name }}</h2>
+          {% if chat.messages.last %}
+            <p>{{ chat.messages.last.content | slice:"0:75" }}{% if chat.messages.last.content|length > 75 %}...{% endif %}</p>
+          {% endif %}
         {% endif %}
         {% endfor %}
       </div>
