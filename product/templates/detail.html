@@ -17,19 +17,19 @@
     {% if item.image %}
     <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-xl">
     {% else %}
-    <img src="https://placehold.co/720x1080?text=Welcome!" class="rounded-xl text-center">
+    <img src="https://placehold.co/720x1080?text=Djangommerce" class="rounded-xl text-center">
     {% endif %}
 
     <!-- Render items details before changes by user -->
     {% if request.user == item.created_by %}
     <div class="p-8">
       <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
-      <p class="py-0.5 text-gray-600"><strong>Price: </strong>{{ item.price }}</p>
-      <p class="py-0.5 text-gray-600"><strong>Status: </strong>{{ item.status }}</p>
-      <p class="py-0.5 text-gray-600"><strong>Seller: </strong>{{ item.created_by.username }}</p>
+      <p class="py-0.5"><strong class="text-gray-600">Price: </strong>{{ item.price }}</p>
+      <p class="py-0.5"><strong class="text-gray-600">Status: </strong>{{ item.status }}</p>
+      <p class="py-0.5"><strong class="text-gray-600">Seller: </strong>{{ item.created_by.username }}</p>
 
       {% if item.description %}
-      <p class="text-gray-700">
+      <p>
         <strong class="py-0.5 text-gray-600">Description:</strong>
         {{ item.description }}
       </p>
@@ -99,15 +99,12 @@
           {% if item.image %}
           <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-96" loading="lazy">
           {% else %}
-          <img src="https://placehold.co/520x960?text=Welcome!" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
+          <img src="https://placehold.co/520x960?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
           {% endif %}
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{ item.name }}</h2>
           <p>Price: {{ item.price }}</p>
-          <!-- <div class="card-actions justify-end">
-            <a href="#" class="btn btn-primary">Buy Now</a>
-          </div> -->
         </div>
       </a>
     </div>
@@ -125,7 +122,7 @@
           {% if item.image %}
           <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-96" loading="lazy">
           {% else %}
-          <img src="https://placehold.co/720x1080?text=Welcome!" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
+          <img src="https://placehold.co/720x1080?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
           {% endif %}
         </figure>
         <div class="card-body">
