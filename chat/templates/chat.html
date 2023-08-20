@@ -7,7 +7,9 @@
 
 {% block content %}
 <section class="px-6 py-8 bg-base-200 rounded-xl">
-  <h1 class="mb-6 text-2xl text-center">Chat for {{ conversation.item.name | title }}</h1>
+  <h1 class="mb-6 text-2xl text-center">
+    Chat for <a href="{% url 'item:detail' conversation.item.id %}" class="underline" target="_blank" rel="noopener noreferrer">{{ conversation.item.name | title }}</a>
+  </h1>
 
   {% for message in conversation.messages.all %}
   <div class="{% if message.created_by == request.user %} chat chat-end {% else %} chat chat-start {% endif %}">
@@ -25,7 +27,7 @@
     </div>
     <div class="chat-bubble">{{ message.content }}</div>
     <div class="chat-footer opacity-50">
-      {{ message.created_at | date:"h:iA" }}
+      {{ message.created_at | date:"H:i | d.m" }}
     </div>
   </div>
   {% endfor %}
