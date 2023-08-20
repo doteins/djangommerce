@@ -46,16 +46,20 @@ def contact(request):
       from_email = form.cleaned_data["from_email"]
       subject = form.cleaned_data["subject"]
       message = form.cleaned_data["message"]
-      try:
-        send_mail(
-          from_email,
-          subject,
-          message,
-          ["admin@example.com"], # Recipient email
-          fail_silently=False,
-        )
-      except BadHeaderError:
-        return HttpResponse("Invalid header found")
+      '''
+        Once you have updated the settings with your email account (see .env file too),
+        you can just delete the comments of the following block of code
+      '''
+      # try:
+      #   send_mail(
+      #     from_email,
+      #     subject,
+      #     message,
+      #     ["admin@example.com"], # Recipient email
+      #     fail_silently=False,
+      #   )
+      # except BadHeaderError:
+      #   return HttpResponse("Invalid header found")
 
       ctx = { 
         "username": name, 
