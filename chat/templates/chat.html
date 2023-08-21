@@ -8,7 +8,16 @@
 {% block content %}
 <section class="px-6 py-8 bg-base-200 rounded-xl">
   <h1 class="mb-6 text-2xl text-center">
-    Chat for <a href="{% url 'item:detail' conversation.item.id %}" class="underline" target="_blank" rel="noopener noreferrer">{{ conversation.item.name | title }}</a>
+    <a href="{% url 'item:detail' conversation.item.id %}" class="underline" target="_blank"
+      rel="noopener noreferrer">{{ conversation.item.name | title }}</a>
+    |
+    {% if conversation.item.status == "Available" %}
+    <span class="text-green-600">{{ conversation.item.status }}</span>
+    {% elif conversation.item.status == "Reserved" %}
+    <span class="text-yellow-600">{{ conversation.item.status }}</span>
+    {% else %}
+    <span class="text-red-600">{{ conversation.item.status }}</span>
+    {% endif %}
   </h1>
 
   <!-- Chat bubbles -->
