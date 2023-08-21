@@ -2,6 +2,8 @@
 
 Djangommerce is an online market hub built using Django, designed to allow users to post items for sale, set prices, manage availability, and communicate with potential buyers through a built-in chat system. The primary aim of Djangommerce is to provide a platform for users to showcase their items.
 
+![Djangommerce](https://i.postimg.cc/PqCWX4dg/Djangommerce.png "Djangommerce demo")
+
 ## Application Architecture
 
 Djangommerce follows the MVT (Model-View-Template) architecture of Django Web Framework:
