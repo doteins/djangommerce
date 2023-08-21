@@ -4,19 +4,35 @@
 {% block title %}About{% endblock %}
 {% block content %}
 <section>
-  <h1>Thanks to: </h1>
-  <div>
-    <ul>
-      <li>
-        <a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Riskywas
-          -
-          Flaticon</a>
-      </li>
-      <li>
-        <a href="https://www.flaticon.com/free-icons/letter-d" title="letter d icons">Letter d icons created by
-          shohanur.rahman13 - Flaticon</a>
-      </li>
-    </ul>
+  <!-- About Djangommerce -->
+  <div class="my-6 hero py-14 bg-base-200 rounded-xl">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="py-2 text-5xl font-bold bg-gradient-to-r from-cyan-500 to-green-500 bg-clip-text text-transparent">
+          Djangommerce</h1>
+        <p class="py-6">
+          This is an online market hub built using Django and Tailwind CSS with DaisyUI components, designed to allow
+          you to post items for sale and find potential buyers!
+        </p>
+        <a href="{% url 'core:signup' %}" class="btn btn-primary">Join us now!</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credit for the logo/icon -->
+  <div class="card w-96 bg-base-200">
+    <div class="card-body items-center text-center">
+      <h2 class="card-title">Credits</h2>
+      <p>
+        Letter D icon created by shohanur.rahman13
+        <a href="https://www.flaticon.com/free-icons/letter-d" title="letter d icons" target="_blank"
+          rel="noopener noreferrer"> - Flaticon</a>
+      </p>
+      <p>
+        Djangommerce image placeholder
+        <a href="https://placehold.co" title="placehold" target="_blank" rel="noopener noreferrer"> - Placehold</a>
+      </p>
+    </div>
   </div>
 </section>
 {% endblock %}
