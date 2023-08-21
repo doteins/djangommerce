@@ -11,14 +11,45 @@
     Chat for <a href="{% url 'item:detail' conversation.item.id %}" class="underline" target="_blank" rel="noopener noreferrer">{{ conversation.item.name | title }}</a>
   </h1>
 
+  <!-- Chat bubbles -->
   {% for message in conversation.messages.all %}
   <div class="{% if message.created_by == request.user %} chat chat-end {% else %} chat chat-start {% endif %}">
     <div class="chat-image avatar">
       <div class="w-10 rounded-full">
-        {% if message.created_by == request.user %} 
-        <svg viewBox="0 0 36 36" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><mask id=":r33:" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36"><rect width="36" height="36" fill="#FFFFFF" rx="72"></rect></mask><g mask="url(#:r33:)"><rect width="36" height="36" fill="#a89f1d"></rect><rect x="0" y="0" width="36" height="36" transform="translate(1 7) rotate(23 18 18) scale(1.2)" fill="#fcaf14" rx="36"></rect><g transform="translate(-7 3.5) rotate(3 18 18)"><path d="M13,21 a1,0.75 0 0,0 10,0" fill="#000000"></path><rect x="11" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect><rect x="23" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect></g></g></svg>
+        <!-- Chat avatar for seller -->
+        {% if message.created_by == request.user %}
+        <svg viewBox="0 0 36 36" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <mask id=":r33:" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36">
+            <rect width="36" height="36" fill="#FFFFFF" rx="72"></rect>
+          </mask>
+          <g mask="url(#:r33:)">
+            <rect width="36" height="36" fill="#a89f1d"></rect>
+            <rect x="0" y="0" width="36" height="36" transform="translate(1 7) rotate(23 18 18) scale(1.2)"
+              fill="#fcaf14" rx="36"></rect>
+            <g transform="translate(-7 3.5) rotate(3 18 18)">
+              <path d="M13,21 a1,0.75 0 0,0 10,0" fill="#000000"></path>
+              <rect x="11" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect>
+              <rect x="23" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect>
+            </g>
+          </g>
+        </svg>
         {% else %}
-        <svg viewBox="0 0 36 36" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><mask id=":r2g:" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36"><rect width="36" height="36" fill="#FFFFFF" rx="72"></rect></mask><g mask="url(#:r2g:)"><rect width="36" height="36" fill="#a89f1d"></rect><rect x="0" y="0" width="36" height="36" transform="translate(-4 -4) rotate(88 18 18) scale(1.1)" fill="#fcaf14" rx="36"></rect><g transform="translate(0 -6) rotate(8 18 18)"><path d="M15 20c2 1 4 1 6 0" stroke="#000000" fill="none" stroke-linecap="round"></path><rect x="11" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect><rect x="23" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect></g></g></svg>
+        <!-- Chat avatar for buyer-->
+        <svg viewBox="0 0 36 36" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <mask id=":r2g:" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="36">
+            <rect width="36" height="36" fill="#FFFFFF" rx="72"></rect>
+          </mask>
+          <g mask="url(#:r2g:)">
+            <rect width="36" height="36" fill="#a89f1d"></rect>
+            <rect x="0" y="0" width="36" height="36" transform="translate(-4 -4) rotate(88 18 18) scale(1.1)"
+              fill="#fcaf14" rx="36"></rect>
+            <g transform="translate(0 -6) rotate(8 18 18)">
+              <path d="M15 20c2 1 4 1 6 0" stroke="#000000" fill="none" stroke-linecap="round"></path>
+              <rect x="11" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect>
+              <rect x="23" y="14" width="1.5" height="2" rx="1" stroke="none" fill="#000000"></rect>
+            </g>
+          </g>
+        </svg>
         {% endif %}
       </div>
     </div>
@@ -35,15 +66,13 @@
   <!-- Render text input form -->
   <form method="post" action=".">
     {% csrf_token %}
-  
+
     {% for field in form %}
     <div class="input-group py-4">
       {{ field }}
       <button class="btn btn-outline btn-accent">Send</button>
     </div>
     {% endfor %}
-  
-    <!-- <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Send</button> -->
   </form>
 </section>
 {% endblock %}
