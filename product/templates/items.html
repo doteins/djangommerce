@@ -47,7 +47,7 @@
       {% endif %}
     </h2>
 
-    <div class="grid grid-cols-3 gap-3">
+    <div class="grid grid-cols-3 lg:grid-cols-4 gap-3">
       {% for item in items %}
       <div class="card bg-base-100 shadow-xl">
         <a href="{% url 'item:detail' item.id %}">
