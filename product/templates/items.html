@@ -11,10 +11,10 @@
 
     <!-- Filter by category -->
     <div class="my-4 mx-4">
-      <p class="font-semibold ">Categories</p>
+      <p class="my-4 font-semibold text-center">Categories:</p>
       <ul>
         {% for category in categories %}
-        <li class="py-2 px-2 rounded-xl{% if category.id == category_id %} bg-gray-200{% endif %}">
+        <li class="py-2 px-2 text-center rounded-xl{% if category.id == category_id %} bg-gray-200{% endif %}">
           <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
         </li>
         {% endfor %}
@@ -36,14 +36,14 @@
   <div class="col-span-3 px-6 py-8 bg-base-200 rounded-xl">
     <h2 class="mb-12 text-2xl text-center">
       {% if query|length > 20 %}
-      <!-- Query calling title method. In python code: title(query)-->
+      <!-- Query calling length method. In python code: length(query)-->
       Try with a shorter text
       {% elif query and not items %}
       No results for "{{ query }}"
       {% elif query and items %}
       Results for "{{ query }}"
       {% else %}
-      New items
+      Items
       {% endif %}
     </h2>
 
@@ -53,9 +53,11 @@
         <a href="{% url 'item:detail' item.id %}">
           <figure>
             {% if item.image %}
-            <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-full" loading="lazy">
+            <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-full"
+              loading="lazy">
             {% else %}
-            <img src="https://placehold.co/520x960?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-full" alt="No image">
+            <img src="https://placehold.co/520x960?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-full"
+              alt="No image">
             {% endif %}
           </figure>
           <div class="card-body">
