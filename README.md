@@ -16,9 +16,8 @@ Djangommerce follows the MVT (Model-View-Template) architecture of Django Web Fr
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3.10
 - Pipenv. (To install pipenv, run `pip install pipenv`)
-- PosgreSQL (Not required if DEBUG in the .env file is set to True)
 
 ### Local setup
 
