@@ -7,7 +7,7 @@ from product.models import Category, Item
 from .forms import SignupForm, ContactForm
 
 def index(request):
-  items = Item.objects.filter(status=Item.AVAILABLE)[0:6] # This paginates the results to get only 6 items
+  items = Item.objects.all()[0:6] # This paginates the results to get only 6 items
   categories = Category.objects.all()
   ctx = {
     "categories": categories,

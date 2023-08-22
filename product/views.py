@@ -6,7 +6,7 @@ from .models import Item, Category
 
 def browser(request):
   query = request.GET.get('query', '')
-  items = Item.objects.filter(status=Item.AVAILABLE)
+  items = Item.objects.all()
   category_id = request.GET.get('category', 0)
   categories = Category.objects.all()
 
