@@ -6,7 +6,15 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="mb-6 text-3xl text-center">Chat for {{ item.name }}</h1>
+<h1 class="mb-6 text-3xl text-center">Chat with {{ item.created_by }} | {{ item.name }} is
+  {% if item.status == "Available" %}
+  <span class="text-green-600">{{ item.status }}</span>
+  {% elif item.status == "Reserved" %}
+  <span class="text-yellow-600">{{ item.status }}</span>
+  {% else %}
+  <span class="text-red-600">{{ item.status }}</span>
+  {% endif %}
+</h1>
 
 <form method="post" action=".">
   {% csrf_token %}
