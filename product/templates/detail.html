@@ -17,7 +17,7 @@
     {% if item.image %}
     <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-xl">
     {% else %}
-    <img src="https://placehold.co/720x1080?text=Djangommerce" class="rounded-xl text-center">
+    <img src="https://placehold.co/1280x853?text=Djangommerce" class="rounded-xl">
     {% endif %}
 
     <!-- Render items details before changes by user -->
@@ -87,7 +87,7 @@
   </div>
 </section>
 
-<!-- Related items box  -->
+<!-- Related items / More of your items box  -->
 <section class="mt-6 px-6 py-12 bg-base-200 rounded-xl">
   {% if request.user == item.created_by %}
   <h1 class="mb-6 text-3xl text-center">More of your items</h1>
@@ -97,9 +97,11 @@
       <a href="{% url 'item:detail' item.id %}">
         <figure>
           {% if item.image %}
-          <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-96" loading="lazy">
+          <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-full"
+            loading="lazy">
           {% else %}
-          <img src="https://placehold.co/520x960?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
+          <img src="https://placehold.co/1080x1280?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-full"
+            alt="No image">
           {% endif %}
         </figure>
         <div class="card-body">
@@ -120,9 +122,11 @@
       <a href="{% url 'item:detail' item.id %}">
         <figure>
           {% if item.image %}
-          <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-96" loading="lazy">
+          <img src="{{ item.image.url }}" alt="{{ item.image }}" class="rounded-t-xl object-cover h-52 w-full"
+            loading="lazy">
           {% else %}
-          <img src="https://placehold.co/720x1080?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-96" alt="No image">
+          <img src="https://placehold.co/1280x853?text=Djangommerce" class="rounded-t-xl object-cover h-52 w-full"
+            alt="No image">
           {% endif %}
         </figure>
         <div class="card-body">
