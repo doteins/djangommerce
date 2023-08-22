@@ -27,7 +27,7 @@ Djangommerce follows the MVT (Model-View-Template) architecture of Django Web Fr
    cd djangommerce
    ```
 
-2. Check out and follow the instructions in the _.env.example_ file.
+2. Follow the instructions in the _.env.example_ file.
 
 3. Create a virtual environment, and install packages the required packages:
    ```
