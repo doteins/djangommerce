@@ -7,11 +7,11 @@
 
 {% block content %}
 <div class="grid grid-cols-4 gap-4">
-  <div class="col-span-1 bg-base-200 rounded-xl">
+  <div class="p-6 col-span-1 bg-base-200 rounded-xl">
 
     <!-- Filter by category -->
-    <div class="my-4 mx-4">
-      <p class="my-4 font-semibold text-center">Categories:</p>
+    <div class="mb-4">
+      <p class="mb-4 font-semibold text-center">Categories:</p>
       <ul>
         {% for category in categories %}
         <li class="py-2 px-2 text-center rounded-xl{% if category.id == category_id %} bg-gray-200{% endif %}">
@@ -23,13 +23,13 @@
 
     <!-- Filter text input -->
     <form method="get" action="{% url 'item:items' %}">
-      <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}"
+      <input name="query" class="block mb-3 w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}"
         placeholder="Filter by...">
-      <button class="mt-2 py-4 px-8 w-full text-lg bg-teal-500 text-white text-center rounded-xl">Search</button>
+      <button class="block mb-3 w-full py-4 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Search</button>
     </form>
-
+    
     <a href="{% url 'item:items' %}"
-      class="mt-2 py-4 px-8 w-full inline-block bg-yellow-500 text-lg rounded-xl text-white text-center">Clear
+      class="mb-3 py-4 w-full block text-lg rounded-xl text-white text-center bg-yellow-500 hover:bg-yellow-700">Clear
       filters</a>
   </div>
 
@@ -43,7 +43,7 @@
       {% elif query and items %}
       Results for "{{ query }}"
       {% else %}
-      Items
+      Available items
       {% endif %}
     </h2>
 
