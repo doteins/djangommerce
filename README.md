@@ -23,7 +23,7 @@ Djangommerce follows the MVT (Model-View-Template) architecture of Django Web Fr
 
 1. Clone the repo and move into the project's directory:
    ```
-   git clone https://github.com/doteins/djangommerce
+   git clone https://github.com/yeroldsan/djangommerce
    cd djangommerce
    ```
 
