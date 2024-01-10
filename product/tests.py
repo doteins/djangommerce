@@ -35,3 +35,26 @@ class ItemModelTest(TestCase):
   def test_item_status_choices(self):
     item = Item.objects.get(name="Test Item")
     self.assertEqual(item.status, Item.AVAILABLE)
+
+  def test_item_ordering(self):
+    user = User.objects.get(username="testuser")
+    category = Category.objects.create(name="Another Test Category")
+    item1 = Item.objects.create(
+      category=category,
+      name="Item 1",
+      description="Description 1",
+      price=30.00,
+      status=Item.AVAILABLE,
+      created_by=user,
+    )
+    item2 = Item.objects.create(
+      category=category,
+      name="Item 2",
+      description="Description 2",
+      price=40.00,
+      status=Item.AVAILABLE,
+      created_by=user,
+    )
+    items = Item.objects.all().order_by("name")
+    self.assertEqual(items[0], item1)
+    self.assertEqual(items[1], item2)
